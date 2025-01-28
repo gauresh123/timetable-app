@@ -8,15 +8,16 @@ import {
   Image,
 } from "react-native";
 import EditTimeTable from "../components/EditTimeTable";
-import Entypo from "@expo/vector-icons/Entypo";
 import { Button } from "react-native-paper";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/baseURL";
 import { useAuthContext } from "../contexts/authContext";
+import LoadingButton from "../components/LoadingButton";
 
 const ViewTimeTable = ({ navigation, route }) => {
   const [open, setOpen] = useState(false);
   const [currentVal, setCurrentVal] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { item } = route.params;
 
   const [data, setData] = useState([]);
@@ -40,7 +41,10 @@ const ViewTimeTable = ({ navigation, route }) => {
       date: currentVal?.date || item?.tabledate,
     };
 
+    if (loading) return;
+
     try {
+      setLoading(true);
       const res = await axios.post(
         `${BACKEND_URL}/${item?.p_id}/updatetable`,
         obj
@@ -51,6 +55,8 @@ const ViewTimeTable = ({ navigation, route }) => {
       }
     } catch (err) {
       alert(err?.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -83,13 +89,14 @@ const ViewTimeTable = ({ navigation, route }) => {
           <Text style={styles.tableheading}>
             {currentVal?.name || item?.p_name}
           </Text>
-          <Button
+          <LoadingButton
             mode="contained"
             onPress={handleEditTable}
             disabled={user?.role == "Student" && true}
+            loading={loading}
           >
             Save
-          </Button>
+          </LoadingButton>
         </View>
         <View style={[styles.row, styles.header]}>
           <Text style={[styles.cell, styles.headerText]}>Subject</Text>

@@ -9,8 +9,6 @@ import {
   Dimensions,
 } from "react-native";
 
-import AntDesign from "@expo/vector-icons/AntDesign";
-import Entypo from "@expo/vector-icons/Entypo";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/baseURL";
 import { useAuthContext } from "../contexts/authContext";

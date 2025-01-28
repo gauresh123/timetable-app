@@ -5,6 +5,7 @@ import DatePicker from "./DatePicker";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/baseURL";
 import { useAuthContext } from "../contexts/authContext";
+import LoadingButton from "./LoadingButton";
 
 export default function EditCourse({
   startDate,
@@ -21,9 +22,12 @@ export default function EditCourse({
   navigation,
 }) {
   const { setRefresh } = useAuthContext();
+  const [loading, setLoading] = useState(false);
 
   const handleUpdate = async () => {
+    if (loading) return;
     try {
+      setLoading(true);
       const res = await axios.put(
         `${BACKEND_URL}/${item?.courseid}/updatecourse`,
         {
@@ -41,6 +45,7 @@ export default function EditCourse({
     } catch (err) {
       alert(err?.message);
     } finally {
+      setLoading(false);
       navigation.navigate("Courses");
     }
   };
@@ -76,9 +81,9 @@ export default function EditCourse({
         <DatePicker date={endDate} setDate={setEndDate} showFlag={true} />
       </View>
 
-      <Button mode="contained" onPress={handleUpdate}>
+      <LoadingButton loading={loading} mode="contained" onPress={handleUpdate}>
         Edit
-      </Button>
+      </LoadingButton>
     </View>
   );
 }

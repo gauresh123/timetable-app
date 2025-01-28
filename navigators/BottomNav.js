@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AntDesign } from "@expo/vector-icons";
 import { useTheme } from "react-native-paper";
 import CourseNavigator from "./CourseNavigator";
 import TimeTableNavigator from "./TimetableNavigator";
@@ -74,14 +73,3 @@ export default function BottomNav({ navigation }) {
     </Tab.Navigator>
   );
 }
-
-const BottomIconContainer = ({ name, focused, color = "black" }) => {
-  const theme = useTheme();
-  return (
-    <AntDesign
-      name={name}
-      size={25}
-      color={focused ? theme.colors.primary : "black"}
-    />
-  );
-};

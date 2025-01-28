@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { View, Platform, TouchableOpacity } from "react-native";
+import { View, Platform, TouchableOpacity, Image } from "react-native";
 import { Text } from "react-native-paper";
-import { MaterialIcons } from "@expo/vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 function DatePicker({ date, setDate, text, showFlag = false }) {
@@ -45,11 +44,7 @@ function DatePicker({ date, setDate, text, showFlag = false }) {
         </TouchableOpacity>
 
         <TouchableOpacity onPress={showDatePicker}>
-          <MaterialIcons
-            name="date-range"
-            size={15}
-            style={{ paddingLeft: 6, paddingTop: "1.5%" }}
-          />
+          <Image source={require("../assets/date.png")} />
         </TouchableOpacity>
       </View>
 

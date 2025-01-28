@@ -5,6 +5,7 @@ import DatePicker from "./DatePicker";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/baseURL";
 import { useAuthContext } from "../contexts/authContext";
+import LoadingButton from "./LoadingButton";
 
 export default function AddCourse({
   startDate,
@@ -20,8 +21,11 @@ export default function AddCourse({
   navigation,
 }) {
   const { setRefresh } = useAuthContext();
+  const [loading, setLoading] = useState(false);
   const handleAdd = async () => {
+    if (loading) return;
     try {
+      setLoading(true);
       const res = await axios.post(`${BACKEND_URL}/addcourse`, {
         coursename: courseName,
         description: description,
@@ -35,6 +39,7 @@ export default function AddCourse({
     } catch (err) {
       console.log(err, "error");
     } finally {
+      setLoading(false);
       navigation.navigate("Courses");
     }
   };
@@ -69,9 +74,9 @@ export default function AddCourse({
         <Text style={styles.date}>End Date</Text>
         <DatePicker date={endDate} setDate={setEndDate} showFlag={true} />
       </View>
-      <Button mode="contained" onPress={handleAdd}>
+      <LoadingButton loading={loading} mode="contained" onPress={handleAdd}>
         Add
-      </Button>
+      </LoadingButton>
     </View>
   );
 }
