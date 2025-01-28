@@ -5,6 +5,7 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import EditTimeTable from "../components/EditTimeTable";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -22,7 +23,13 @@ const ViewTimeTable = ({ navigation, route }) => {
   const { setRefresh, user } = useAuthContext();
 
   const handleEdit = (val) => {
-    setCurrentVal(val);
+    const { name, ...rest } = val;
+
+    setCurrentVal((prev) => ({
+      name: prev?.name || item?.p_name,
+      ...rest,
+    }));
+
     setOpen(true);
   };
 
@@ -59,14 +66,12 @@ const ViewTimeTable = ({ navigation, route }) => {
       <Text style={styles.cell}>{item.starttime}</Text>
       <Text style={styles.cell}>{item.endtime}</Text>
       {user?.role == "Teacher" && (
-        <Text style={styles.cell}>
-          <Entypo
-            name="edit"
-            size={18}
-            color="gray"
-            onPress={() => handleEdit(item)}
+        <TouchableOpacity style={styles.cell} onPress={() => handleEdit(item)}>
+          <Image
+            source={require("../assets/edit.png")}
+            style={{ alignSelf: "center" }}
           />
-        </Text>
+        </TouchableOpacity>
       )}
     </View>
   );
@@ -107,9 +112,11 @@ const ViewTimeTable = ({ navigation, route }) => {
         openModal={open}
         closeMoadal={() => setOpen(false)}
         mode="View"
-        data={item}
+        data={data}
         currentVal={currentVal}
+        setCurrentVal={(val) => setCurrentVal(val)}
         setData={(val) => setData(val)}
+        item={item}
       />
     </>
   );
@@ -150,6 +157,7 @@ const styles = StyleSheet.create({
   tableheading: {
     fontWeight: "600",
     fontSize: 16,
+    width: "70%",
   },
 });
 

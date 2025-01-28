@@ -5,6 +5,8 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  Image,
+  Dimensions,
 } from "react-native";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -13,6 +15,8 @@ import axios from "axios";
 import { BACKEND_URL } from "../constants/baseURL";
 import { useAuthContext } from "../contexts/authContext";
 import LoadingContainer from "../components/LoadingContainer";
+
+const { width, height } = Dimensions.get("window");
 
 export default function TimeTable({ navigation }) {
   const [data, setData] = useState(null);
@@ -66,9 +70,11 @@ export default function TimeTable({ navigation }) {
               style={styles.editContainer}
               onPress={() => handleDelete(item?.p_id)}
             >
-              <Text>
-                <AntDesign name="delete" size={18} color="gray" />
-              </Text>
+              <Image
+                source={require("../assets/delete.png")}
+                width={(width * 1) / 100}
+                height={(height * 1) / 100}
+              />
             </TouchableOpacity>
           )}
           {user?.role == "Teacher" && (
@@ -76,9 +82,11 @@ export default function TimeTable({ navigation }) {
               style={styles.editContainer}
               onPress={() => navigation.navigate("Preview", { item: item })}
             >
-              <Text>
-                <Entypo name="edit" size={18} color="gray" />
-              </Text>
+              <Image
+                source={require("../assets/edit.png")}
+                width={(width * 1) / 100}
+                height={(height * 1) / 100}
+              />
             </TouchableOpacity>
           )}
         </View>

@@ -67,8 +67,15 @@ export default function EditCourse({
         onChangeText={(val) => setTeacher(val)}
         mode="outlined"
       />
-      <DatePicker date={startDate} setDate={setStartDate} showFlag={true} />
-      <DatePicker date={endDate} setDate={setEndDate} showFlag={true} />
+      <View>
+        <Text style={styles.date}>Start Date</Text>
+        <DatePicker date={startDate} setDate={setStartDate} showFlag={true} />
+      </View>
+      <View>
+        <Text style={styles.date}>End Date</Text>
+        <DatePicker date={endDate} setDate={setEndDate} showFlag={true} />
+      </View>
+
       <Button mode="contained" onPress={handleUpdate}>
         Edit
       </Button>
@@ -81,5 +88,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     gap: 20,
+  },
+  date: {
+    fontWeight: "600",
   },
 });

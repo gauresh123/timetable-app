@@ -25,6 +25,7 @@ const CreateTimeTable = ({ navigation }) => {
       starttime: startTime,
       endtime: endTime,
       id: data?.length,
+      name: title,
     };
     for (let [key, value] of Object.entries(obj)) {
       if (key !== "id" && !obj[key]) {

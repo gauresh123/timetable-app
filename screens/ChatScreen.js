@@ -94,7 +94,7 @@ const ChatScreen = () => {
       <FlatList
         ref={flatListRef}
         data={messages}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, i) => i}
         renderItem={renderMessage}
         contentContainerStyle={styles.messageList}
         onContentSizeChange={() =>

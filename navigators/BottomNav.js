@@ -6,8 +6,11 @@ import TimeTableNavigator from "./TimetableNavigator";
 import ChatNavigator from "./ChatNavigator";
 import { useAuthContext } from "../contexts/authContext";
 import LogOut from "../components/LogOut";
+import { Dimensions, Image } from "react-native";
 
 const Tab = createBottomTabNavigator();
+
+const { width, height } = Dimensions.get("window");
 
 export default function BottomNav({ navigation }) {
   const { logoutUser } = useAuthContext();
@@ -24,7 +27,13 @@ export default function BottomNav({ navigation }) {
         name={"Courses"}
         component={CourseNavigator}
         options={{
-          tabBarIcon: (props) => <BottomIconContainer name="home" {...props} />,
+          tabBarIcon: () => (
+            <Image
+              source={require("../assets/home.png")}
+              width={(width * 1) / 100}
+              height={(height * 1) / 100}
+            />
+          ),
           ...defaultTabOptions,
           headerShown: false,
         }}
@@ -33,7 +42,7 @@ export default function BottomNav({ navigation }) {
         name="Time Table"
         component={TimeTableNavigator}
         options={{
-          tabBarIcon: (props) => <BottomIconContainer name="book" {...props} />,
+          tabBarIcon: () => <Image source={require("../assets/table.png")} />,
           ...defaultTabOptions,
           title: "Time Table",
           headerShown: false,
@@ -44,9 +53,7 @@ export default function BottomNav({ navigation }) {
         name="AI Chat"
         component={ChatNavigator}
         options={{
-          tabBarIcon: (props) => (
-            <BottomIconContainer name="wechat" {...props} />
-          ),
+          tabBarIcon: () => <Image source={require("../assets/chat.png")} />,
           ...defaultTabOptions,
           title: "AI Chat",
           headerShown: false,
@@ -57,9 +64,7 @@ export default function BottomNav({ navigation }) {
         name="Logout"
         component={LogOut}
         options={{
-          tabBarIcon: (props) => (
-            <BottomIconContainer name="logout" {...props} />
-          ),
+          tabBarIcon: () => <Image source={require("../assets/logout.png")} />,
           ...defaultTabOptions,
           title: "Log Out",
           headerShown: false,

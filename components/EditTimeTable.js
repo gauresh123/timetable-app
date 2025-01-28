@@ -10,6 +10,8 @@ const EditTimeTable = ({
   data,
   currentVal,
   setData,
+  setCurrentVal,
+  item,
 }) => {
   const [title, setTitle] = useState("");
   const [subject, setSubject] = useState("");
@@ -36,18 +38,23 @@ const EditTimeTable = ({
     }
 
     setData((prev) =>
-      prev?.map((val) => (val.id === currentVal?.id ? { ...newObj } : val))
+      prev?.map((val) =>
+        val.id === currentVal?.id ? { ...val, ...newObj } : val
+      )
     );
+
+    setCurrentVal(newObj);
 
     closeMoadal();
   };
+  console.log(item.tabledate, "table");
 
   useEffect(() => {
-    setTitle(data?.p_name);
+    setTitle(currentVal?.name);
     setSubject(currentVal?.subject);
     setStartTime(currentVal?.starttime);
     setEndTime(currentVal?.endtime);
-    setDate(new Date(data?.tabledate));
+    setDate(new Date(item?.tabledate));
   }, [currentVal]);
 
   console.log(currentVal, "currentval");
