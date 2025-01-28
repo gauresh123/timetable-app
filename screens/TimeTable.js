@@ -41,10 +41,12 @@ export default function TimeTable({ navigation }) {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${BACKEND_URL}/deletetable`, {
+      await axios?.post(`${BACKEND_URL}/deletetable`, {
         id: id,
       });
     } catch (err) {
+      console.log(err);
+
       alert(err?.message);
     } finally {
       getData();
