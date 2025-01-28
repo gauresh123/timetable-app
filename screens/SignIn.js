@@ -129,6 +129,6 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "100%",
-    backgroundColor: "transparent", // Keep the background transparent to see the gradient
+    backgroundColor: "transparent",
   },
 });

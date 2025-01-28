@@ -51,7 +51,6 @@ const ViewTimeTable = ({ navigation, route }) => {
     setData(item?.time_table);
   }, []);
 
-  // Render function for each row
   const renderItem = ({ item }) => (
     <View style={styles.row}>
       <Text style={[styles.cell, { textAlign: "left", paddingLeft: 5 }]}>

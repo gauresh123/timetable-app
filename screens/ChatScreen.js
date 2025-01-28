@@ -21,7 +21,6 @@ const ChatScreen = () => {
   const [inputText, setInputText] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Reference to FlatList for scrolling
   const flatListRef = useRef(null);
 
   const handleSend = async () => {
@@ -66,24 +65,6 @@ const ChatScreen = () => {
     } finally {
       setLoading(false);
     }
-    // Add the user's message to the chat
-    // const userMessage = {
-    //   id: Math.random().toString(),
-    //   text: inputText,
-    //   sender: "user",
-    // };
-    // setMessages((prevMessages) => [...prevMessages, userMessage]);
-    // setInputText("");
-
-    // // Mock AI response after a delay
-    // setTimeout(() => {
-    //   const aiResponse = {
-    //     id: Math.random().toString(),
-    //     text: `You said: "${inputText}". Here's a mock response from AI.`,
-    //     sender: "ai",
-    //   };
-    //   setMessages((prevMessages) => [...prevMessages, aiResponse]);
-    // }, 1000);
   };
 
   // Automatically scroll to the last message when a new message is added

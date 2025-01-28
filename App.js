@@ -5,8 +5,7 @@ import {
   initialWindowMetrics,
   SafeAreaProvider,
 } from "react-native-safe-area-context";
-import { Provider } from "react-redux";
-import { store } from "./store/store";
+
 import AuthContextProvider from "./contexts/authContext";
 import * as Notifications from "expo-notifications";
 import * as Font from "expo-font";
@@ -59,13 +58,11 @@ export default function App() {
 
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <Provider store={store}>
-        <AuthContextProvider>
-          <LoadingContainer loading={fontsLoaded}>
-            <Route />
-          </LoadingContainer>
-        </AuthContextProvider>
-      </Provider>
+      <AuthContextProvider>
+        <LoadingContainer loading={fontsLoaded}>
+          <Route />
+        </LoadingContainer>
+      </AuthContextProvider>
     </SafeAreaProvider>
   );
 }
